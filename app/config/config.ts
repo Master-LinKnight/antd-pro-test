@@ -116,10 +116,15 @@ export default {
               authority: ['admin'],
             },
             {
-              name: 'etflist',
-              icon: 'smile',
-              path: '/etflist',
-              component: './ETFList',
+              name: 'etf',
+              path: '/ETF',
+              routes: [
+                {
+                  name: 'etflist',
+                  path: './ETFlist',
+                  component: './ETFList',
+                },
+              ],
             },
             {
               component: './404',
