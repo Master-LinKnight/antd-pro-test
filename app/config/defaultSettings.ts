@@ -43,18 +43,18 @@ export interface DefaultSettings {
 }
 
 export default {
-  navTheme: 'dark',
-  primaryColor: '#1890FF',
+  navTheme: 'light',
+  primaryColor: '#F4B042',
   layout: 'sidemenu',
   contentWidth: 'Fluid',
-  fixedHeader: false,
+  fixedHeader: true,
   autoHideHeader: false,
-  fixSiderbar: false,
+  fixSiderbar: true,
   colorWeak: false,
   menu: {
     locale: true,
   },
-  title: 'Ant Design Pro',
+  title: 'ETF Monitor',
   pwa: false,
   iconfontUrl: '',
 } as DefaultSettings;
