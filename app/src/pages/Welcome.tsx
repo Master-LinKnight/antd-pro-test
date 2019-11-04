@@ -21,6 +21,16 @@ export default (): React.ReactNode => (
   <PageHeaderWrapper>
     <Card>
       <Alert
+        message="巴菲特：人生就像滚雪球，重要的是发现很湿的雪和很长的坡！"
+        type="info"
+        showIcon
+        banner
+        style={{
+          margin: -12,
+          marginBottom: 24,
+        }}
+      />
+      <Alert
         message="umi ui 现已发布，欢迎使用 npm run ui 启动体验。"
         type="success"
         showIcon
