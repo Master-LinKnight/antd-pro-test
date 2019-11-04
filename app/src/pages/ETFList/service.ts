@@ -1,8 +1,14 @@
 import request from '@/utils/request';
-import { TableListParams } from './data.d';
+import { TableListParams, ETFTableListParams } from './data.d';
 
 export async function queryRule(params: TableListParams) {
   return request('/api/rule', {
+    params,
+  });
+}
+
+export async function getETFRank(params: ETFTableListParams) {
+  return request('/api/ETFRank', {
     params,
   });
 }

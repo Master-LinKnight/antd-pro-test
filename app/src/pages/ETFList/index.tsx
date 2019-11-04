@@ -1,10 +1,8 @@
 import {
-  Badge,
   Button,
   Card,
   Col,
   DatePicker,
-  Divider,
   Dropdown,
   Form,
   Icon,
@@ -15,14 +13,13 @@ import {
   Select,
   message,
 } from 'antd';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import { Dispatch, Action } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { SorterResult } from 'antd/es/table';
 import { connect } from 'dva';
-import moment from 'moment';
 import { StateType } from './model';
 import CreateForm from './components/CreateForm';
 import StandardTable, { StandardTableColumnProps } from './components/StandardTable';
@@ -38,12 +35,14 @@ const getValue = (obj: { [x: string]: string[] }) =>
     .map(key => obj[key])
     .join(',');
 
-type IStatusMapType = 'default' | 'processing' | 'success' | 'error';
-const statusMap = ['default', 'processing', 'success', 'error'];
-const status = ['关闭', '运行中', '已上线', '异常'];
+// type IStatusMapType = 'default' | 'processing' | 'success' | 'error';
+// const statusMap = ['default', 'processing', 'success', 'error'];
+// const status = ['关闭', '运行中', '已上线', '异常'];
 
 interface TableListProps extends FormComponentProps {
-  dispatch: Dispatch<Action<'etfList/add' | 'etfList/fetch' | 'etfList/remove' | 'etfList/update'>>;
+  dispatch: Dispatch<
+    Action<'etfList/add' | 'etfList/fetch' | 'etfList/remove' | 'etfList/update' | 'etfList/get'>
+  >;
   loading: boolean;
   etfList: StateType;
 }
@@ -86,71 +85,72 @@ class TableList extends Component<TableListProps, TableListState> {
 
   columns: StandardTableColumnProps[] = [
     {
-      title: '规则名称',
+      title: '基金代码',
+      dataIndex: 'code',
+    },
+    {
+      title: '基金名称',
       dataIndex: 'name',
     },
     {
-      title: '描述',
-      dataIndex: 'desc',
+      title: '当前基金单位净值',
+      dataIndex: 'netWorth',
     },
     {
-      title: '服务调用次数',
-      dataIndex: 'callNo',
-      sorter: true,
-      align: 'right',
-      render: (val: string) => `${val} 万`,
-      // mark to display a total number
-      needTotal: true,
+      title: '日涨幅（%）',
+      dataIndex: 'dayGrowth',
+      render: (val: string) => this.renderText(val),
     },
     {
-      title: '状态',
-      dataIndex: 'status',
-      filters: [
-        {
-          text: status[0],
-          value: '0',
-        },
-        {
-          text: status[1],
-          value: '1',
-        },
-        {
-          text: status[2],
-          value: '2',
-        },
-        {
-          text: status[3],
-          value: '3',
-        },
-      ],
-      render(val: IStatusMapType) {
-        return <Badge status={statusMap[val]} text={status[val]} />;
-      },
+      title: '最近一周涨幅（%）',
+      dataIndex: 'lastWeekGrowth',
+      render: (val: string) => this.renderText(val),
     },
     {
-      title: '上次调度时间',
-      dataIndex: 'updatedAt',
-      sorter: true,
-      render: (val: string) => <span>{moment(val).format('YYYY-MM-DD HH:mm:ss')}</span>,
+      title: '最近一个月涨幅（%）',
+      dataIndex: 'lastMonthGrowth',
+      render: (val: string) => this.renderText(val),
     },
     {
-      title: '操作',
-      render: (text, record) => (
-        <Fragment>
-          <a onClick={() => this.handleUpdateModalVisible(true, record)}>配置</a>
-          <Divider type="vertical" />
-          <a href="">订阅警报</a>
-        </Fragment>
-      ),
+      title: '最近三个月涨幅（%）',
+      dataIndex: 'lastThreeMonthGrowth',
+      render: (val: string) => this.renderText(val),
+    },
+    {
+      title: '最近六个月涨幅（%）',
+      dataIndex: 'lastSixMonthGrowth',
+      render: (val: string) => this.renderText(val),
+    },
+    {
+      title: '最近一年涨幅（%）',
+      dataIndex: 'lastYearGrowth',
+      render: (val: string) => this.renderText(val),
+    },
+    {
+      title: '今年的涨幅（%）',
+      dataIndex: 'thisYearGrowth',
+      render: (val: string) => this.renderText(val),
     },
   ];
 
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'etfList/fetch',
+      type: 'etfList/get',
     });
   }
+
+  renderText = (text: string) => {
+    const number: Number = Number.parseFloat(text);
+    if (number > 0) {
+      return <span style={{ color: 'red' }}>{text}</span>;
+    }
+    if (number === 0) {
+      return <span style={{ color: 'grey' }}>{text}</span>;
+    }
+
+    return <span style={{ color: 'green' }}>{text}</span>;
+  };
 
   handleStandardTableChange = (
     pagination: Partial<TableListPagination>,
@@ -177,7 +177,7 @@ class TableList extends Component<TableListProps, TableListState> {
     }
 
     dispatch({
-      type: 'etfList/fetch',
+      type: 'etfList/get',
       payload: params,
     });
   };
@@ -189,7 +189,7 @@ class TableList extends Component<TableListProps, TableListState> {
       formValues: {},
     });
     dispatch({
-      type: 'etfList/fetch',
+      type: 'etfList/get',
       payload: {},
     });
   };
@@ -249,7 +249,7 @@ class TableList extends Component<TableListProps, TableListState> {
       });
 
       dispatch({
-        type: 'etfList/fetch',
+        type: 'etfList/get',
         payload: values,
       });
     });

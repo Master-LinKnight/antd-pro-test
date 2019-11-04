@@ -1,9 +1,134 @@
 import { Request, Response } from 'express';
 import { parse } from 'url';
-import { TableListItem, TableListParams } from './data.d';
+import { TableListItem, TableListParams, ETFTableListItem } from './data.d';
 
 // mock tableListDataSource
 let tableListDataSource: TableListItem[] = [];
+
+let ETFtableListDataSource: ETFTableListItem[] = [];
+
+ETFtableListDataSource = [
+  {
+    code: '001104',
+    name: '华安新丝路主题股票',
+    netWorth: '1.4040',
+    dayGrowth: '0.2141',
+    lastWeekGrowth: '1.9608',
+    lastMonthGrowth: '3.6162',
+    lastThreeMonthGrowth: '13.1346',
+    lastSixMonthGrowth: '20.5150',
+    lastYearGrowth: '62.8770',
+    thisYearGrowth: '62.50',
+  },
+  {
+    code: '160127',
+    name: '南方新兴消费增长分级',
+    netWorth: '1.2830',
+    dayGrowth: '0.7855',
+    lastWeekGrowth: '1.9063',
+    lastMonthGrowth: '3.1351',
+    lastThreeMonthGrowth: '10.0343',
+    lastSixMonthGrowth: '14.4514',
+    lastYearGrowth: '62.6198',
+    thisYearGrowth: '56.0665',
+  },
+  {
+    code: '001044',
+    name: '嘉实新消费股票',
+    netWorth: '1.5020',
+    dayGrowth: '1.4865',
+    lastWeekGrowth: '1.4179',
+    lastMonthGrowth: '5.4035',
+    lastThreeMonthGrowth: '8.1667',
+    lastSixMonthGrowth: '8.0183',
+    lastYearGrowth: '39.8956',
+    thisYearGrowth: '35.3247',
+  },
+  {
+    code: '001651',
+    name: '工银新蓝筹股票',
+    netWorth: '1.4930',
+    dayGrowth: '0.6065',
+    lastWeekGrowth: '1.1518',
+    lastMonthGrowth: '2.7529',
+    lastThreeMonthGrowth: '3.1077',
+    lastSixMonthGrowth: '8.6608',
+    lastYearGrowth: '29.4883',
+    thisYearGrowth: '29.4883',
+  },
+  {
+    code: '000083',
+    name: '汇添富消费行业混合',
+    netWorth: '4.5810',
+    dayGrowth: '0.5267',
+    lastWeekGrowth: '1.0143',
+    lastMonthGrowth: '2.1405',
+    lastThreeMonthGrowth: '7.6869',
+    lastSixMonthGrowth: '13.3070',
+    lastYearGrowth: '74.0502',
+    thisYearGrowth: '67.2508',
+  },
+  {
+    code: '001215',
+    name: '博时沪港深优质企业基金A',
+    netWorth: '1.0210',
+    dayGrowth: '-0.3902',
+    lastWeekGrowth: '0.8893',
+    lastMonthGrowth: '0.2947',
+    lastThreeMonthGrowth: '1.4911',
+    lastSixMonthGrowth: '7.5869',
+    lastYearGrowth: '42.3989',
+    thisYearGrowth: '36.1333',
+  },
+  {
+    code: '070032',
+    name: '嘉实优化红利混合',
+    netWorth: '1.72',
+    dayGrowth: '0.4086',
+    lastWeekGrowth: '0.7615',
+    lastMonthGrowth: '2.4419',
+    lastThreeMonthGrowth: '7.2319',
+    lastSixMonthGrowth: '12.8609',
+    lastYearGrowth: '48.9178',
+    thisYearGrowth: '43.6926',
+  },
+  {
+    code: '000190',
+    name: '中银新回报灵活配置混合',
+    netWorth: '1.4480',
+    dayGrowth: '0.5556',
+    lastWeekGrowth: '0.5556',
+    lastMonthGrowth: '1.6854',
+    lastThreeMonthGrowth: '4.3228',
+    lastSixMonthGrowth: '8.0597',
+    lastYearGrowth: '12.1612',
+    thisYearGrowth: '12.5097',
+  },
+  {
+    code: '002058',
+    name: '中银新机遇混合C',
+    netWorth: '1.0510',
+    dayGrowth: '0',
+    lastWeekGrowth: '0.3820',
+    lastMonthGrowth: '0.9606',
+    lastThreeMonthGrowth: '1.8107',
+    lastSixMonthGrowth: '7.2476',
+    lastYearGrowth: '12.5727',
+    thisYearGrowth: '13.1447',
+  },
+  {
+    code: '002057',
+    name: '中银新机遇混合A',
+    netWorth: '1.0520',
+    dayGrowth: '0',
+    lastWeekGrowth: '0.3817',
+    lastMonthGrowth: '0.9596',
+    lastThreeMonthGrowth: '1.9076',
+    lastSixMonthGrowth: '7.3496',
+    lastYearGrowth: '12.6751',
+    thisYearGrowth: '13.2471',
+  },
+];
 
 for (let i = 0; i < 8; i += 1) {
   tableListDataSource.push({
@@ -141,7 +266,21 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
   return res.json(result);
 }
 
+function getETFRank(req: Request, res: Response) {
+  const dataSource = ETFtableListDataSource;
+  const result = {
+    list: dataSource,
+    pagination: {
+      total: dataSource.length,
+      pageSize: 10,
+      current: 1,
+    },
+  };
+  return res.json(result);
+}
+
 export default {
   'GET /api/rule': getRule,
   'POST /api/rule': postRule,
+  'GET /api/ETFRank': getETFRank,
 };
