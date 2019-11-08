@@ -137,6 +137,25 @@ class TableList extends Component<TableListProps, TableListState> {
     const { dispatch } = this.props;
     dispatch({
       type: 'etfList/get',
+      payload: {
+        fundType: ['指数型', '股票型', '债券型', 'QDII', 'FOF', '混合型'],
+        sort: 'lastWeek',
+        fundCompany: [
+          '嘉实',
+          '易方达',
+          '博时',
+          '华夏',
+          '中银',
+          '工银',
+          '广发',
+          '南方',
+          '华安',
+          '汇添富',
+        ],
+        fundGrade: ['上证五星'],
+        pageIndex: 1,
+        pageSize: 100,
+      },
     });
   }
 

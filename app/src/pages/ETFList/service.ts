@@ -8,8 +8,23 @@ export async function queryRule(params: TableListParams) {
 }
 
 export async function getETFRank(params: ETFTableListParams) {
-  return request('/api/ETFRank', {
-    params,
+  return request('/fund/rank', {
+    method: 'POST',
+    data: {
+      ...params,
+      method: 'post',
+    },
+  }).then((res: any) => {
+    const data: any = {};
+    if (res.code === 200 && res.data) {
+      const list: any = res.data;
+      list.forEach((element: any) => {
+        element.key = element.code;
+      });
+      data.list = list;
+      data.pagination = { total: 10, pageSize: 10, current: 1 };
+    }
+    return data;
   });
 }
 

@@ -188,13 +188,11 @@ export default {
     basePath: '/',
   },
   chainWebpack: webpackPlugin,
-  /*
   proxy: {
-    '/server/api/': {
-      target: 'https://preview.pro.ant.design/',
+    '/fund/': {
+      target: 'https://api.doctorxiong.club/v1/',
       changeOrigin: true,
-      pathRewrite: { '^/server': '' },
+      pathRewrite: { '^/fund': '/fund' },
     },
   },
-  */
 } as IConfig;

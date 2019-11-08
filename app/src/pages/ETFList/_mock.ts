@@ -282,5 +282,5 @@ function getETFRank(req: Request, res: Response) {
 export default {
   'GET /api/rule': getRule,
   'POST /api/rule': postRule,
-  'GET /api/ETFRank': getETFRank,
+  'GET /api/rank': getETFRank,
 };
