@@ -189,10 +189,10 @@ export default {
   },
   chainWebpack: webpackPlugin,
   proxy: {
-    '/fund/': {
+    '/finance/': {
       target: 'https://api.doctorxiong.club/v1/',
       changeOrigin: true,
-      pathRewrite: { '^/fund': '/fund' },
+      pathRewrite: { '^/finance': '' },
     },
   },
 } as IConfig;

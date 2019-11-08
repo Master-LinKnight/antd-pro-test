@@ -8,7 +8,7 @@ export async function queryRule(params: TableListParams) {
 }
 
 export async function getETFRank(params: ETFTableListParams) {
-  return request('/fund/rank', {
+  return request('/finance/fund/rank', {
     method: 'POST',
     data: {
       ...params,
