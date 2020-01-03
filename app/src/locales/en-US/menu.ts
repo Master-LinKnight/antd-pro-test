@@ -50,4 +50,6 @@ export default {
   'menu.editor.koni': 'Koni Editor',
   'menu.etf': 'ETF',
   'menu.etf.etflist': 'ETF List',
+  'menu.stock': 'Stock',
+  'menu.stock.stocklist': 'Stock List',
 };

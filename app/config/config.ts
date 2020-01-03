@@ -127,6 +127,17 @@ export default {
               ],
             },
             {
+              name: 'stock',
+              path: '/stock',
+              routes: [
+                {
+                  name: 'stocklist',
+                  path: './stocklist',
+                  component: './stockList',
+                },
+              ],
+            },
+            {
               component: './404',
             },
           ],
@@ -193,6 +204,11 @@ export default {
       target: 'https://api.doctorxiong.club/v1/',
       changeOrigin: true,
       pathRewrite: { '^/finance': '' },
+    },
+    '/finance-stock/': {
+      target: 'http://localhost:8080/',
+      changeOrigin: true,
+      pathRewrite: { '^/finance-stock': 'finance-stock' },
     },
   },
 } as IConfig;

@@ -51,4 +51,6 @@ export default {
   'menu.editor.koni': '拓撲編輯器',
   'menu.etf': 'ETF',
   'menu.etf.etflist': 'ETF 列表',
+  'menu.stock': '股票',
+  'menu.stock.stocklist': '股票列表',
 };
