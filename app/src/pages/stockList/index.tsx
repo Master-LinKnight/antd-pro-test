@@ -9,6 +9,7 @@ import { ColumnProps } from 'antd/es/table';
 import { connect } from 'dva';
 
 import { TrackStockData, TrackStockListData, StockData } from './data.d';
+import style from './style.less';
 
 interface StockListProps extends FormComponentProps {
   dispatch: Dispatch<Action<'stockList/get'>>;
@@ -42,20 +43,16 @@ interface TableColumnProps extends ColumnProps<TrackStockListData> {
   }),
 )
 class StockList extends Component<StockListProps, StockListState> {
-  //   constructor(props: StockListProps) {
-  //     super(props);
-  //     this.state = {
-  //       dataSource: [],
-  //     };
-  //   }
   columns: TableColumnProps[] = [
     {
       title: '股票代码',
       dataIndex: 'stockId',
+      render: (val: string) => <span style={{ color: '#333' }}>{val}</span>,
     },
     {
       title: '名称',
       dataIndex: 'stockName',
+      render: (val: string) => <span style={{ color: '#333' }}>{val}</span>,
     },
     {
       title: '当前价格',
@@ -83,9 +80,7 @@ class StockList extends Component<StockListProps, StockListState> {
     const { dispatch } = this.props;
     dispatch({
       type: 'stockList/get',
-      payload: {
-        dateKey: '20200103',
-      },
+      payload: {},
     });
   }
 
@@ -120,15 +115,18 @@ class StockList extends Component<StockListProps, StockListState> {
         });
       }
     });
-    // try {
-    //   this.setState({
-    //     dataSource: dataSource,
-    //   });
-    // } catch (e) {
-    //   console.log(e);
-    // }
 
     return dataSource;
+  };
+
+  renderTextColor = (number: number) => {
+    if (number > 0) {
+      return style['row-red-col'];
+    }
+    if (number === 0) {
+      return style['row-grey-col'];
+    }
+    return style['row-green-col'];
   };
 
   render = () => {
@@ -144,6 +142,17 @@ class StockList extends Component<StockListProps, StockListState> {
             columns={this.columns}
             loading={loading}
             pagination={{ pageSize: data.length }}
+            size="small"
+            rowClassName={(record: TrackStockListData) => {
+              let className = '';
+              if (record.stockIncrease) className = this.renderTextColor(record.stockIncrease);
+              return className;
+            }}
+            onRow={(record: TrackStockListData) => ({
+              onClick: () => {
+                console.log(record.stockId);
+              },
+            })}
           />
         </Card>
       </PageHeaderWrapper>

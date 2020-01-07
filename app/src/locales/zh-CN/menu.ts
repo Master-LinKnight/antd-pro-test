@@ -51,5 +51,5 @@ export default {
   'menu.etf': 'ETF',
   'menu.etf.etflist': 'ETF 列表',
   'menu.stock': '股票',
-  'menu.stock.stocklist': '股票列表',
+  'menu.stock.stocklist': '追踪股列表',
 };
