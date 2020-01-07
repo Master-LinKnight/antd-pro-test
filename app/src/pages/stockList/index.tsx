@@ -7,7 +7,7 @@ import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { StateType } from './model';
 import { ColumnProps } from 'antd/es/table';
 import { connect } from 'dva';
-
+import router from 'umi/router';
 import { TrackStockData, TrackStockListData, StockData } from './data.d';
 import style from './style.less';
 
@@ -151,6 +151,9 @@ class StockList extends Component<StockListProps, StockListState> {
             onRow={(record: TrackStockListData) => ({
               onClick: () => {
                 console.log(record.stockId);
+                router.push({
+                  pathname: '/stock/stocklist/stockDetail',
+                });
               },
             })}
           />

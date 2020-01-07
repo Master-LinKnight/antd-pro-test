@@ -135,6 +135,12 @@ export default {
                   path: './stocklist',
                   component: './stockList',
                 },
+                {
+                  path: './stocklist/stockDetail',
+                  name: 'stockDetail',
+                  hideInMenu: 'true',
+                  component: './stockDetail',
+                },
               ],
             },
             {
