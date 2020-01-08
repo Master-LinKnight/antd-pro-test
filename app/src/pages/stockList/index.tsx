@@ -158,7 +158,7 @@ class StockList extends Component<StockListProps, StockListState> {
               onClick: () => {
                 router.push({
                   pathname: '/stock/stocklist/stockDetail',
-                  query: { stockId: record.stockId },
+                  query: { stockId: record.stockId, stockName: record.stockName },
                 });
               },
             })}

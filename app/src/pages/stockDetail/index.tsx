@@ -23,12 +23,13 @@ class StockDetail extends Component<StockDetailProps, StockDetailState> {
   render = () => {
     const {
       location: {
-        query: { stockId },
+        query: { stockId, stockName },
       },
     } = this.props;
     return (
       <PageHeaderWrapper>
         <Card bordered={false}>{stockId}</Card>
+        <Card bordered={false}>{stockName}</Card>
       </PageHeaderWrapper>
     );
   };
