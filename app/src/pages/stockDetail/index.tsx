@@ -5,22 +5,32 @@ import { Dispatch, Action } from 'redux';
 import { FormComponentProps } from 'antd/es/form';
 import { PageHeaderWrapper } from '@ant-design/pro-layout';
 
-interface StockListProps extends FormComponentProps {
+interface StockDetailProps extends FormComponentProps {
+  location: any;
   dispatch: Dispatch<Action<'stockList/get'>>;
   loading: boolean;
 }
 
-interface StockListState {
-  //   dataSource: TrackStockListData[];
+interface StockDetailState {
+  //   dataSource: TrackStockDetailData[];
 }
 
-class StockList extends Component<StockListProps, StockListState> {
-  componentDidMount() {}
+class StockDetail extends Component<StockDetailProps, StockDetailState> {
+  componentDidMount() {
+    // console.log(this.props);
+  }
 
-  render = () => (
-    <PageHeaderWrapper>
-      <Card bordered={false}>123</Card>
-    </PageHeaderWrapper>
-  );
+  render = () => {
+    const {
+      location: {
+        query: { stockId },
+      },
+    } = this.props;
+    return (
+      <PageHeaderWrapper>
+        <Card bordered={false}>{stockId}</Card>
+      </PageHeaderWrapper>
+    );
+  };
 }
-export default Form.create<StockListProps>()(StockList);
+export default Form.create<StockDetailProps>()(StockDetail);

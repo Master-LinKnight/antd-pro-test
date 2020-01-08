@@ -52,4 +52,5 @@ export default {
   'menu.etf.etflist': 'ETF List',
   'menu.stock': 'Stock',
   'menu.stock.stocklist': 'Stock List',
+  'menu.stock.stockDetail': 'Stock Detail',
 };

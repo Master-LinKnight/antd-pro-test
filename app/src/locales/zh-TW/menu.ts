@@ -53,4 +53,5 @@ export default {
   'menu.etf.etflist': 'ETF 列表',
   'menu.stock': '股票',
   'menu.stock.stocklist': '追踪股列表',
+  'menu.stock.stockDetail': '详情',
 };

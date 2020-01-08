@@ -74,6 +74,12 @@ class StockList extends Component<StockListProps, StockListState> {
       title: '市净率',
       dataIndex: 'stockPB',
     },
+    {
+      title: '',
+      dataIndex: '',
+      key: 'x',
+      render: () => <a style={{ color: '#F4B042' }}>详情</a>,
+    },
   ];
 
   componentDidMount() {
@@ -150,9 +156,9 @@ class StockList extends Component<StockListProps, StockListState> {
             }}
             onRow={(record: TrackStockListData) => ({
               onClick: () => {
-                console.log(record.stockId);
                 router.push({
                   pathname: '/stock/stocklist/stockDetail',
+                  query: { stockId: record.stockId },
                 });
               },
             })}
